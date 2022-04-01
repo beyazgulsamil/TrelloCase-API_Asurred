@@ -1,5 +1,8 @@
 package trello;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import data.Data;
 import models.board.Board;
 import models.board.Cards;
@@ -7,6 +10,7 @@ import models.board.Lists;
 import org.junit.Assert;
 import retrofit2.Call;
 import retrofit2.Response;
+import rx.internal.operators.SingleDoOnUnsubscribe;
 import utils.Caller;
 import utils.NumericUtilities;
 import utils.Printer;
@@ -107,6 +111,7 @@ public class Trello extends Caller {
         Assert.assertEquals(cardName,response.body().getName());
         Assert.assertEquals(desc,response.body().getDesc());
         log.new Info("Successfully updated card description as "+response.body().getDesc());
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     }
 
