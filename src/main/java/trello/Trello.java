@@ -2,6 +2,8 @@ package trello;
 
 import data.Data;
 import models.board.Board;
+import models.board.Cards;
+import models.board.Lists;
 import org.junit.Assert;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -37,17 +39,19 @@ public class Trello extends Caller {
 
     public void createList(String listName,String boardName){
         log.new Info("Creating a list...");
-        Call<Board.Lists> list = services.createList(((Board) Data.context.get(boardName)).getId(),properties.getProperty("key"),properties.getProperty("token"),listName);
-        Board.Lists responseList = perform(list,true,"listCreator");
+        Call<Lists> list = services.createList(((Board) Data.context.get(boardName)).getId(), properties.getProperty("key"), properties.getProperty("token"),listName);
+        Lists responseList = perform(list,true,"listCreator");
         log.new Info("List is: "+responseList.getId());
-        Data.contextList.put(boardName,responseList);
+        Data.context.put(listName,responseList);
     }
 
-    public void createCard(String listName){
+    public void createCard(String cardName, String listName){
         log.new Info("Creating Card...");
-        Call<Board.Cards> card = services.createCard(properties.getProperty("key"),properties.getProperty("token"),listName);
-        Board.Cards responseCard = perform(card,true,"cardCreator");
+        Call<Cards> createCard = services.createCard(properties.getProperty("key"), properties.getProperty("token"), ((Lists) Data.context.get(listName)).getId(), cardName);
+        Cards responseCard = perform(createCard,true,"cardCreator");
         log.new Info("Card is: "+responseCard.getId());
+        Data.context.put(cardName,responseCard);
+
     }
 
     public void deleteBoard(String boardName){
@@ -58,9 +62,12 @@ public class Trello extends Caller {
         log.new Info("Successfully deleted board");
     }
 
-    public void deleteCard(String cardId){
+    public void deleteCard(String cardName){
         log.new Info("Deleting a card...");
-        Call<Object> deleteCardRequest = services.deleteBoard(cardId,properties.getProperty("key"),properties.getProperty("token"));
+        Call<Object> deleteCardRequest = services.deleteCard(
+                ((Cards) Data.context.get(cardName)).getId(),
+                properties.getProperty("key"),
+                properties.getProperty("token"));
         Response<Object> response = getResponse(deleteCardRequest,true,"boardDelete");
         Assert.assertTrue(response.isSuccessful());
         log.new Info("Successfully deleted board");

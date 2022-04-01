@@ -23,10 +23,10 @@ public class TrelloSteps {
     @Then("Delete a board with id {}")
     public void deleteBoard(String id) {trello.deleteBoard(id);}
 
-    @Then("Create a new card in list id {}")
-    public void createCard(String listId){trello.createCard(listId);}
+    @Then("Create a new card named {} for the list named {}")
+    public void createCard(String cardName,String listName){trello.createCard(cardName,listName);}
 
-    @Then("Delete a card with id {}")
-    public void deleteCard(String cardId){trello.deleteCard(cardId);}
+    @Then("Delete the card named {}")
+    public void deleteCard(String cardName){trello.deleteCard(cardName);}
 
 }

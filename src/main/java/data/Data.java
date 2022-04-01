@@ -1,10 +1,10 @@
 package data;
 
-import java.util.HashMap;
-import java.util.Map;
+import models.board.Cards;
+
+import java.util.*;
 
 public class Data {
     public static Map<String, Object> context = new HashMap<>();
-    public static Map<String, Object> contextList = new HashMap<>();
-    public static Map<String, Object> contextCard = new HashMap<>();
+    public static List<Cards> cards = new ArrayList<>();
 }

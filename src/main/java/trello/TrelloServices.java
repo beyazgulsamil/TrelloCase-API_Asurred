@@ -1,6 +1,8 @@
 package trello;
 
 import models.board.Board;
+import models.board.Cards;
+import models.board.Lists;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -12,10 +14,10 @@ public interface TrelloServices {
     Call<Board> createBoard(@Query("key") String key, @Query("token") String token, @Query("name") String name);
 
     @POST(BASE_URL + TrelloApi.CARD_SUFFIX)
-    Call<Board.Cards> createCard(@Query("key") String key, @Query("token") String token, @Query("idList") String name);
+    Call<Cards> createCard(@Query("key") String key, @Query("token") String token, @Query("idList") String name, @Query("name") String cardName);
 
     @POST(BASE_URL + TrelloApi.BOARD_SUFFIX+TrelloApi.LIST_SUFFIX)
-    Call<Board.Lists> createList(@Path("id")String id, @Query("key") String key, @Query("token") String token, @Query("name") String name);
+    Call<Lists> createList(@Path("id")String id, @Query("key") String key, @Query("token") String token, @Query("name") String name);
 
     @DELETE(BASE_URL + TrelloApi.BOARD_SUFFIX + "{id}/")
     Call<Object> deleteBoard(@Path("id") String id, @Query("key") String key, @Query("token") String token);
