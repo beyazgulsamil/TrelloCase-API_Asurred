@@ -25,5 +25,7 @@ public interface TrelloServices {
     @DELETE(BASE_URL + TrelloApi.CARD_SUFFIX + "{id}/")
     Call<Object> deleteCard(@Path("id") String id, @Query("key") String key, @Query("token") String token);
 
+    @PUT(BASE_URL + TrelloApi.CARD_SUFFIX + "{id}/")
+    Call<Cards> updateCard(@Path("id") String id, @Query("key") String key, @Query("token") String token, @Query("desc") String desc);
 
 }

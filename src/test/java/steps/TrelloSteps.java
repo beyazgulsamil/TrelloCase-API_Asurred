@@ -1,6 +1,5 @@
 package steps;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
 import data.Data;
 import io.cucumber.java.en.Then;
 import models.board.Board;
@@ -28,5 +27,8 @@ public class TrelloSteps {
 
     @Then("Delete the card named {}")
     public void deleteCard(String cardName){trello.deleteCard(cardName);}
+
+    @Then("Update a random cards description as {}")
+    public void updateCard(String desc){trello.updateRandomCard(desc);}
 
 }

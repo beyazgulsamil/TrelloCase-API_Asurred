@@ -3,12 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>bora</groupId>
-    <artifactId>Api-Automation</artifactId>
+    <artifactId>TestiniumCase</artifactId>
     <version>0.1.1</version>
     <packaging>jar</packaging>
 
-    <name>Api Automation</name>
-    <url>https://github.com/Umutayb/Api-Automation-Sample</url>
+    <name>TestiniumCase</name>
 
     <properties>
         <name>${project.name}</name>
@@ -18,12 +17,6 @@
     </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.mashape.unirest</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>1.4.9</version>
-        </dependency>
 
         <!-- Api Assured -->
         <dependency>

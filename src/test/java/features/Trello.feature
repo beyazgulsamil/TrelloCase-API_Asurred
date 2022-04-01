@@ -2,10 +2,11 @@
 Feature: trello
 
   Scenario: task
-    * Create a board named beege
-    * Create a list named list3 in board named beege
-    * Create a new card named card1 for the list named list3
-    * Create a new card named card2 for the list named list3
-    * Delete the card named card1
-    * Delete the card named card2
-    * Delete a board named beege
+    * Create a board named MyBoard
+    * Create a list named MyList in board named MyBoard
+    * Create a new card named MyCard for the list named MyList
+    * Create a new card named YourCard for the list named MyList
+    * Update a random cards description as MyDescription
+    * Delete the card named MyCard
+    * Delete the card named YourCard
+    * Delete a board named MyBoard
