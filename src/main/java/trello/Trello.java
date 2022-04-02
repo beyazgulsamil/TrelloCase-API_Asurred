@@ -1,8 +1,5 @@
 package trello;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import data.Data;
 import models.board.Board;
 import models.board.Cards;
@@ -39,7 +36,7 @@ public class Trello extends Caller {
     public void createBoard(String boardName) {
         log.new Info("Creating a board...");
         Call<Board> board = services.createBoard(properties.getProperty("key"), properties.getProperty("token"), boardName);
-        Board responseBoard = perform(board, true, "boardCreator");
+        Board responseBoard = perform(board, true, true,"boardCreator");
         log.new Info("Board id is: " + responseBoard.getId());
         log.new Info("Name is verified as: " + responseBoard.getName());
         Data.context.put(boardName, responseBoard);
@@ -48,7 +45,7 @@ public class Trello extends Caller {
     public void createList(String listName, String boardName) {
         log.new Info("Creating a list...");
         Call<Lists> list = services.createList(((Board) Data.context.get(boardName)).getId(), properties.getProperty("key"), properties.getProperty("token"), listName);
-        Lists responseList = perform(list, true, "listCreator");
+        Lists responseList = perform(list, true,true,"listCreator");
         log.new Info("List is: " + responseList.getId());
         Data.context.put(listName, responseList);
     }
@@ -56,7 +53,7 @@ public class Trello extends Caller {
     public void createCard(String cardName, String listName) {
         log.new Info("Creating Card...");
         Call<Cards> createCard = services.createCard(properties.getProperty("key"), properties.getProperty("token"), ((Lists) Data.context.get(listName)).getId(), cardName);
-        Cards responseCard = perform(createCard, true, "cardCreator");
+        Cards responseCard = perform(createCard, true,true, "cardCreator");
         log.new Info("Card is: " + responseCard.getId());
         List<Cards> cards = List.of(responseCard);
         Data.context.put(cardName, responseCard);
@@ -75,7 +72,7 @@ public class Trello extends Caller {
                 ((Board) Data.context.get(boardName)).getId(),
                 properties.getProperty("key"),
                 properties.getProperty("token"));
-        Response<Object> response = getResponse(deleteRequest, true, "boardDelete");
+        Response<Object> response = getResponse(deleteRequest, true,true, "boardDelete");
         Assert.assertTrue(response.isSuccessful());
         log.new Info("Successfully deleted board");
     }
@@ -86,7 +83,7 @@ public class Trello extends Caller {
                 ((Cards) Data.context.get(cardName)).getId(),
                 properties.getProperty("key"),
                 properties.getProperty("token"));
-        Response<Object> response = getResponse(deleteCardRequest, true, "cardDelete");
+        Response<Object> response = getResponse(deleteCardRequest, true,true, "cardDelete");
         Assert.assertTrue(response.isSuccessful());
         log.new Info("Successfully deleted board");
     }
@@ -102,7 +99,7 @@ public class Trello extends Caller {
                 properties.getProperty("key"),
                 properties.getProperty("token"),
                 desc);
-        Response<Cards> response = getResponse(updateCard, true, "updateCard");
+        Response<Cards> response = getResponse(updateCard, true, true,"updateCard");
         Assert.assertTrue(response.isSuccessful());
         assert response.body() != null;
         Assert.assertEquals(cardName,response.body().getName());

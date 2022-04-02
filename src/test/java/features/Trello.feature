@@ -1,7 +1,7 @@
 @Trello
 Feature: trello
 
-  Scenario: task
+  Scenario: Api Task
     * Create a board named MyBoard
     * Create a list named MyList in board named MyBoard
     * Create a new card named MyCard for the list named MyList
