@@ -10,16 +10,13 @@ import models.board.Lists;
 import org.junit.Assert;
 import retrofit2.Call;
 import retrofit2.Response;
-import rx.internal.operators.SingleDoOnUnsubscribe;
 import utils.Caller;
 import utils.NumericUtilities;
 import utils.Printer;
 import utils.ServiceGenerator;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -111,7 +108,6 @@ public class Trello extends Caller {
         Assert.assertEquals(cardName,response.body().getName());
         Assert.assertEquals(desc,response.body().getDesc());
         log.new Info("Successfully updated card description as "+response.body().getDesc());
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     }
 
